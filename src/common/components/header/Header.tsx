@@ -6,7 +6,7 @@ import {Container} from "../container/Container";
 interface HeaderProps {}
 
 export const Header: FC<HeaderProps> = () => {
-    const navLinkClasses = ({isActive}: {isActive: boolean}) => clsx("py-navItem transition-all", {
+    const navLinkClasses = ({isActive}: {isActive: boolean}) => clsx("py-navItem transition-all hover:text-black/60 hover:no-underline", {
         "text-black/80": isActive,
         "text-black/30": !isActive
     });
