@@ -1,22 +1,31 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{ts,tsx}",
-  ],
-  theme: {
-    extend: {
-      fontFamily: {
-        titillium: ["Titillium Web", "sans-serif"]
-      },
-      colors: {
-        theme: {
-          conduit: "#5CB85C"
-        }
-      },
-      spacing: {
-        navItem: "0.425rem"
-      }
+    content: [
+        "./src/**/*.{ts,tsx}",
+    ],
+    theme: {
+        extend: {
+            fontFamily: {
+                titillium: ["Titillium Web", "sans-serif"],
+            },
+            colors: {
+                conduit: {
+                    green: "#5CB85C",
+                },
+            },
+            spacing: {
+                navItem: "0.425rem",
+            },
+            boxShadow: {
+                banner: "inset 0 8px 8px -8px rgba(0, 0, 0, .3), inset 0 -8px 8px -8px rgba(0, 0, 0, .3)",
+            },
+            dropShadow: {
+                bannerLogo: "0 1px 3px rgba(0, 0, 0, .3)",
+            },
+            fontSize: {
+                bannerLogo: "3.5rem"
+            }
+        },
     },
-  },
-  plugins: [],
-}
+    plugins: [],
+};
