@@ -1,7 +1,7 @@
 import {FC} from "react";
 import {Header} from "./common/components/header/Header";
 import {Banner} from "./common/components/banner/Banner";
-import {Article} from "./modules/feed/components/article/Article";
+import {Feed} from "./modules/feed/Feed";
 
 interface AppProps {
 }
@@ -12,7 +12,7 @@ export const App: FC<AppProps> = () => {
             <Header/>
             <main>
                 <Banner />
-                <Article/>
+                <Feed />
             </main>
         </>
     )
