@@ -3,7 +3,7 @@ import {Article} from "../article/Article";
 import {IFeedArticle} from "../../api/dto/global-feed.in";
 
 interface ArticleListProps {
-    list: IFeedArticle[]
+    list: IFeedArticle[];
 }
 
 export const ArticleList: FC<ArticleListProps> = ({ list }) => {
