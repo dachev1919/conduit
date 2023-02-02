@@ -1,17 +1,15 @@
 import { FC } from "react";
 import {Article} from "../article/Article";
+import {IFeedArticle} from "../../api/dto/global-feed.in";
 
-interface ArticleListProps {}
+interface ArticleListProps {
+    list: IFeedArticle[]
+}
 
-export const ArticleList: FC<ArticleListProps> = () => {
+export const ArticleList: FC<ArticleListProps> = ({ list }) => {
     return (
         <>
-            <Article/>
-            <Article/>
-            <Article/>
-            <Article/>
-            <Article/>
-            <Article/>
+            {list.map(article => <Article key={article.slug} {...article} />)}
         </>
     )
 }

@@ -2,38 +2,39 @@ import {FC} from "react";
 import {Link} from "react-router-dom";
 import {FavoriteButton} from "../favorite/FavoriteButton";
 import {TagList} from "../tag-list/TagList";
+import {IFeedArticle} from "../../api/dto/global-feed.in";
+import {DateTime} from "luxon";
 
-interface ArticleProps {
+interface ArticleProps extends IFeedArticle {
 }
 
-export const Article: FC<ArticleProps> = () => {
+export const Article: FC<ArticleProps> = ({author, createdAt, favoritesCount, body, description, tagList}) => {
     return (
         <article>
             <div className="border-t border-black/10 py-6">
                 <div className="mb-4 font-light flex justify-between">
                     <div>
-                        <Link to="/conduit/@nokwin">
+                        <Link to={`/conduit/@${author.username.replace(/\s/g, "")}`}>
                             <img className="inline-block h-8 w-8 rounded-full"
-                                 src="https://api.realworld.io/images/demo-avatar.png" alt="nokwin"/>
+                                 src={author.image} alt={author.username.replace(/\s/g, "")}/>
                         </Link>
                         <div className="mr-6 ml-0.3 inline-flex flex-col leading-4">
-                            <Link className="font-medium" to="/conduit/@nokwin">
-                                Oleh Dachev
+                            <Link className="font-medium" to={`/conduit/@${author.username.replace(/\s/g, "")}`}>
+                                {author.username}
                             </Link>
-                            <span className="text-conduit-gray text-date">9 october, 2023</span>
+                            <span className="text-conduit-gray text-date">{DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_FULL)}</span>
                         </div>
                     </div>
-                    <FavoriteButton/>
+                    <FavoriteButton count={favoritesCount}/>
                 </div>
-                <Link to="/conduit/@nokwin" className="text-inherit hover:text-inherit">
-                    <h1 className="mb-1 font-semibold text-2xl">Some title</h1>
+                <Link to={`/conduit/@${author.username.replace(/\s/g, "")}`} className="text-inherit hover:text-inherit">
+                    <h1 className="mb-1 font-semibold text-2xl">{body.replace(/\\n/g, ' ')}</h1>
                     <p className="text-conduit-darkenGray font-light mb-1">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium asperiores,
-                        assumenda deserunt eos esse exercitationem laborum optio quas repudiandae sint!
+                        {description}
                     </p>
                     <div className="flex justify-between items-center">
-                        <span className="text-conduit-gray text-date font-light">Read more...</span>
-                        <TagList/>
+                        <span className="text-conduit-gray text-date font-light hover:text-conduit-darkGreen transition-all">Read more...</span>
+                        <TagList list={tagList}/>
                     </div>
                 </Link>
             </div>
