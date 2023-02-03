@@ -1,9 +1,9 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
-import {axiosBaseQuery} from "../../../core/axios-base-quary";
 import {IFeedArticle} from "./dto/global-feed.in";
 import {FEED_PAGE_SIZE} from "../consts/consts";
 import {IPopularTagsInDTO} from "./dto/popular-tags.in";
 import {transformResponse} from "./utils/utils";
+import {realWorldBaseQuery} from "../../../core/api/realworld-base-query";
 
 interface IBaseFeedParams {
     page: number;
@@ -25,9 +25,7 @@ export interface IFeedData {
 
 export const feedApi = createApi({
     reducerPath: "feedApi",
-    baseQuery: axiosBaseQuery({
-        baseUrl: "https://api.realworld.io/api",
-    }),
+    baseQuery: realWorldBaseQuery,
     endpoints: (builder) => ({
         getGlobalFeed: builder.query<IFeedData, IGlobalFeedParams>({
             query: ({page, tag}) => ({
