@@ -16,7 +16,7 @@ export const ProfileBanner: FC<ProfileBannerProps> = ({profile}) => {
                     <h2 className="text-center font-bold text-2xl ">{profile.username}</h2>
                 </div>
                 <div className="flex justify-end">
-                    <FollowButton/>
+                    <FollowButton name={profile.username}/>
                 </div>
             </Container>
         </div>

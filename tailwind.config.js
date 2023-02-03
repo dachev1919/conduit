@@ -7,6 +7,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 titillium: ["Titillium Web", "sans-serif"],
+                sourceSerif: ["Source Serif Pro", "serif"]
             },
             colors: {
                 conduit: {
@@ -20,7 +21,8 @@ module.exports = {
                         700: "#999",
                         800: "#818a91",
                         900: "#687877",
-                        1000: "#373a3c",
+                        950: "#373a3c",
+                        1000: "#333"
                     },
                     green: "#5CB85C",
                     darkGreen: "#3d8b3d",
@@ -42,10 +44,15 @@ module.exports = {
             fontSize: {
                 bannerLogo: "3.5rem",
                 date: "0.8rem",
+                articleTitle: "2.8rem",
+                articleBody: "1.2rem"
             },
             borderRadius: {
                 buttonSm: "0.2rem",
                 tagRadius: "10rem",
+            },
+            lineHeight: {
+                150: "150%"
             }
         },
     },
