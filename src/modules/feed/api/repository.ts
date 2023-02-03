@@ -5,6 +5,7 @@ import {IPopularTagsInDTO} from "./dto/popular-tags.in";
 import {transformResponse} from "./utils/utils";
 import {realWorldBaseQuery} from "../../../core/api/realworld-base-query";
 import {ISingleArticleInDTO} from "./dto/single-article.in";
+import {IArticleCommentsInDTO} from "./dto/article-comments.in";
 
 interface IBaseFeedParams {
     page: number;
@@ -64,8 +65,19 @@ export const feedApi = createApi({
             query: ({slug}) => ({
                 url: `/articles/${slug}`
             })
+        }),
+        getArticleComments: builder.query<IArticleCommentsInDTO, SingleArticleParams>({
+            query: ({slug}) => ({
+                url: `/articles/${slug}/comments`
+            })
         })
     }),
 });
 
-export const { useGetGlobalFeedQuery, useGetPopularTagsQuery, useGetProfileFeedQuery, useGetSingleArticleQuery } = feedApi;
+export const {
+    useGetGlobalFeedQuery,
+    useGetPopularTagsQuery,
+    useGetProfileFeedQuery,
+    useGetSingleArticleQuery,
+    useGetArticleCommentsQuery
+} = feedApi;

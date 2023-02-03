@@ -13,7 +13,7 @@ export const Article: FC<ArticleProps> = ({author, createdAt, favoritesCount, bo
         <article>
             <div className="border-t border-black/10 py-6">
                 <div className="mb-4 font-light flex justify-between">
-                    <ArticleAuthor author={author} publishedAt={createdAt} />
+                    <ArticleAuthor author={author} publishedAt={createdAt}/>
                     <FavoriteButton count={favoritesCount}/>
                 </div>
                 <Link to={`/conduit/article/${encodeURIComponent(slug)}`} className="text-inherit hover:text-inherit">
@@ -22,7 +22,8 @@ export const Article: FC<ArticleProps> = ({author, createdAt, favoritesCount, bo
                         {description}
                     </p>
                     <div className="flex justify-between items-center">
-                        <span className="text-conduit-gray-500 text-date font-light hover:text-conduit-darkGreen transition-all">Read more...</span>
+                        <span
+                            className="text-conduit-gray-500 text-date font-light hover:text-conduit-darkGreen transition-all">Read more...</span>
                         <TagList list={tagList}/>
                     </div>
                 </Link>

@@ -5,11 +5,13 @@ import {TagList} from "../components/tag-list/TagList";
 import {ArticleMeta} from "../components/article-meta/ArticleMeta";
 import {useGetSingleArticleQuery} from "../api/repository";
 import {useParams} from "react-router-dom";
+import {CommentsList} from "../components/comments-list/CommentsList";
+
 interface ArticleDetailsProps {
 }
 
 export const ArticleDetails: FC<ArticleDetailsProps> = () => {
-    const { slug } = useParams();
+    const {slug} = useParams();
     const {data, isLoading, isFetching, error} = useGetSingleArticleQuery({slug: slug!});
 
     if (isLoading || isFetching) {
@@ -26,15 +28,27 @@ export const ArticleDetails: FC<ArticleDetailsProps> = () => {
 
     return (
         <>
-            <ArticleBanner publishedAt={data.article.createdAt} title={data.article.body.replace(/\\n/g, ' ')} author={data.article.author} likes={data.article.favoritesCount}/>
+            <ArticleBanner
+                publishedAt={data.article.createdAt}
+                title={data.article.body.replace(/\\n/g, ' ')}
+                author={data.article.author}
+                likes={data.article.favoritesCount}
+            />
             <Container>
                 <div className="pb-8 border-b">
                     <p className="text-articleBody leading-150 font-sourceSerif mb-6">{data.article.description}</p>
                     <TagList list={data.article.tagList}/>
                 </div>
                 <div className="mt-8 flex justify-center">
-                    <ArticleMeta publishedAt={data.article.createdAt} authorNameStyle="GREEN" author={data.article.author} likes={data.article.favoritesCount}/>
+                    <ArticleMeta
+                        publishedAt={data.article.createdAt}
+                        authorNameStyle="GREEN"
+                        author={data.article.author}
+                        likes={data.article.favoritesCount}
+                    />
                 </div>
+
+                <CommentsList/>
             </Container>
         </>
     )
