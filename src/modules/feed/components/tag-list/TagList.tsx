@@ -14,7 +14,6 @@ interface TagListProps {
 }
 
 export const TagList: FC<TagListProps> = ({list, itemStyle = TagListStyle.LIGHT, itemAs = "li"}) => {
-    console.log(TagListStyle.LIGHT)
     const itemClasses = clsx("font-light text-date border mr-1 mb-1.5 px-tagPx pt-1 pb-1.5 rounded-tagRadius leading-none transition-all", {
         "border-conduit-gray-300 text-conduit-gray-300 text-conduit-gray-600": itemStyle === TagListStyle.LIGHT,
         "bg-conduit-gray-800 border-conduit-gray-800 text-white": itemStyle === TagListStyle.DARK,

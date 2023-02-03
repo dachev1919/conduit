@@ -7,7 +7,7 @@ interface ProfileBannerProps {
 
 export const ProfileBanner: FC<ProfileBannerProps> = () => {
     return (
-        <div className="bg-conduit-gray-100 pt-8 pb-4">
+        <div className="bg-conduit-gray-100 pt-8 pb-4 mb-8">
             <Container>
                 <div>
                     <img className="w-25 h-25 rounded-full mx-auto mb-4" src="https://api.realworld.io/images/demo-avatar.png" alt="avatar"/>

@@ -12,6 +12,7 @@ export const Routers: FC<RoutersProps> = () => {
             <Route path="/" element={ <Navigate to="/conduit"/> }/>
             <Route path="/conduit" element={<GlobalFeed/>}/>
             <Route path="/conduit/:profile" element={<Profile/>}/>
+            <Route path="/conduit/:profile/favorites" element={<Profile/>}/>
         </Routes>
     )
 }
