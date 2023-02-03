@@ -16,9 +16,9 @@ interface TagListProps {
 export const TagList: FC<TagListProps> = ({list, itemStyle = TagListStyle.LIGHT, itemAs = "li"}) => {
     console.log(TagListStyle.LIGHT)
     const itemClasses = clsx("font-light text-date border mr-1 mb-1.5 px-tagPx pt-1 pb-1.5 rounded-tagRadius leading-none transition-all", {
-        "border-conduit-lightenGray text-conduit-lightenGray text-conduit-tagColor": itemStyle === TagListStyle.LIGHT,
-        "bg-conduit-tagDarkBg border-conduit-tagDarkBg text-white": itemStyle === TagListStyle.DARK,
-        "hover:text-white hover:bg-conduit-tagHoverDarkBg": itemStyle === TagListStyle.DARK && itemAs === "a"
+        "border-conduit-gray-300 text-conduit-gray-300 text-conduit-gray-600": itemStyle === TagListStyle.LIGHT,
+        "bg-conduit-gray-800 border-conduit-gray-800 text-white": itemStyle === TagListStyle.DARK,
+        "hover:text-white hover:bg-conduit-gray-900": itemStyle === TagListStyle.DARK && itemAs === "a"
     });
 
     return (
@@ -26,7 +26,7 @@ export const TagList: FC<TagListProps> = ({list, itemStyle = TagListStyle.LIGHT,
             {list.map(tag => {
                 return itemAs === "li"
                     ? <li key={tag} className={itemClasses}>{tag}</li>
-                    : <Link to={`/?tag=${tag}`} key={tag} className={itemClasses}>{tag}</Link>
+                    : <Link to={`/conduit/?tag=${tag}`} key={tag} className={itemClasses}>{tag}</Link>
             })}
         </ul>
     )

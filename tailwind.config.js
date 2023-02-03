@@ -10,22 +10,27 @@ module.exports = {
             },
             colors: {
                 conduit: {
+                    gray: {
+                        100: "#f3f3f3",
+                        200: "#eceeef",
+                        300: "#ddd",
+                        400: "#ccc",
+                        500: "#bbb",
+                        600: "#aaa",
+                        700: "#999",
+                        800: "#818a91",
+                        900: "#687877",
+                        1000: "#373a3c",
+                    },
                     green: "#5CB85C",
                     darkGreen: "#3d8b3d",
-                    gray: "#bbb",
-                    darkenGray: "#999",
-                    lightenGray: "#ddd",
-                    tagColor: "#aaa",
-                    paginationHover: "#eceeef",
-                    tagCloud: "#f3f3f3",
-                    tagDarkBg: "#818a91",
-                    tagHoverDarkBg: "#687877",
                 },
             },
             spacing: {
                 navItem: "0.425rem",
-                0.3: "0.3rem",
                 0.2: "0.2rem",
+                0.3: "0.3rem",
+                25: "6.25rem",
                 tagPx: "0.6rem"
             },
             boxShadow: {

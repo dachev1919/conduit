@@ -1,7 +1,6 @@
 import {FC} from "react";
 import {Header} from "./common/components/header/Header";
-import {Banner} from "./common/components/banner/Banner";
-import {Feed} from "./modules/feed/Feed";
+import {Routers} from "./routes/Routers";
 
 interface AppProps {
 }
@@ -11,8 +10,7 @@ export const App: FC<AppProps> = () => {
         <>
             <Header/>
             <main className="pb-16">
-                <Banner />
-                <Feed />
+                <Routers/>
             </main>
         </>
     )

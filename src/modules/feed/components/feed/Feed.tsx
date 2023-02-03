@@ -1,28 +1,27 @@
-import {FC, useState} from "react";
-import {Container} from "../../common/components/container/Container";
-import {ArticleList} from "./components/article-list/ArticleList";
-import {FeedToggle} from "./components/feed-toggle/FeedToggle";
-import {useGetGlobalFeedQuery} from "./api/repository";
+import {FC} from "react";
+import {Container} from "../../../../common/components/container/Container";
+import {ArticleList} from "../article-list/ArticleList";
+import {FeedToggle} from "../feed-toggle/FeedToggle";
 import ReactPaginate from "react-paginate";
-import {FEED_PAGE_SIZE} from "./consts/consts";
+import {FEED_PAGE_SIZE} from "../../consts/consts";
 import {useSearchParams} from "react-router-dom";
-import {serializeSearchParams} from "../../utils/router";
-import {TagCloud} from "./components/tag-cloud/TagCloud";
+import {serializeSearchParams} from "../../../../utils/router";
+import {TagCloud} from "../tag-cloud/TagCloud";
+import {IFeedData} from "../../api/repository";
 
-interface FeedProps {}
+interface FeedProps {
+    isLoading: boolean;
+    isFetching: boolean;
+    error: any;
+    data?: IFeedData;
+}
 
-export const Feed: FC<FeedProps> = () => {
+export const Feed: FC<FeedProps> = ({isLoading, isFetching, error, data}) => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [page, setPage] = useState(searchParams.get('page') ? Number(searchParams.get('page')) : 0);
+    const page = searchParams.get('page') ? Number(searchParams.get('page')) : 0;
     const pageChangeHandler = ({selected}: {selected: number}) => {
-        setPage(selected);
         setSearchParams(serializeSearchParams({page: String(selected)}))
     };
-
-    const {data, error, isLoading, isFetching} = useGetGlobalFeedQuery({
-        page,
-        tag: searchParams.get("tag"),
-    });
 
     if (isLoading || isFetching) {
         return (
@@ -56,7 +55,7 @@ export const Feed: FC<FeedProps> = () => {
                             activeClassName="active"
                             pageRangeDisplayed={(data?.articlesCount || 0) / FEED_PAGE_SIZE}
                             activeLinkClassName="group-[.active]:bg-conduit-green group-[.active]:text-white group-[.active]:border-conduit-green"
-                            pageLinkClassName="py-2 px-2.5 leading-none text-conduit-green bg-white border border-conduit-lightgray -ml-px hover:bg-conduit-paginationHover group-[&:nth-child(2)]:rounded-l group-[&:nth-last-child(-n+2)]:rounded-r"
+                            pageLinkClassName="py-2 px-2.5 leading-none text-conduit-green bg-white border border-conduit-gray-300 -ml-px hover:bg-conduit-gray-200 group-[&:nth-child(2)]:rounded-l group-[&:nth-last-child(-n+2)]:rounded-r"
                             onPageChange={pageChangeHandler}
                             forcePage={page}
                         />

@@ -15,7 +15,7 @@ export const FeedToggle: FC<FeedToggleProps> = () => {
         <div>
             <ul className="flex gap-5">
                 <li className="flex">
-                    <NavLink className={globalFeedClasses} to="/">Global Feed</NavLink>
+                    <NavLink className={globalFeedClasses} to="/conduit">Global Feed</NavLink>
                 </li>
                 {tag && (
                     <li className="flex">
