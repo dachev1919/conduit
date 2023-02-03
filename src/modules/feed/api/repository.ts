@@ -4,6 +4,7 @@ import {FEED_PAGE_SIZE} from "../consts/consts";
 import {IPopularTagsInDTO} from "./dto/popular-tags.in";
 import {transformResponse} from "./utils/utils";
 import {realWorldBaseQuery} from "../../../core/api/realworld-base-query";
+import {ISingleArticleInDTO} from "./dto/single-article.in";
 
 interface IBaseFeedParams {
     page: number;
@@ -21,6 +22,10 @@ interface IProfileFeedParams extends IBaseFeedParams{
 export interface IFeedData {
     articles: IFeedArticle[];
     articlesCount: number;
+}
+
+interface SingleArticleParams {
+    slug: string;
 }
 
 export const feedApi = createApi({
@@ -55,7 +60,12 @@ export const feedApi = createApi({
                 url: "/tags",
             })
         }),
+        getSingleArticle: builder.query<ISingleArticleInDTO, SingleArticleParams>({
+            query: ({slug}) => ({
+                url: `/articles/${slug}`
+            })
+        })
     }),
 });
 
-export const { useGetGlobalFeedQuery, useGetPopularTagsQuery, useGetProfileFeedQuery } = feedApi;
+export const { useGetGlobalFeedQuery, useGetPopularTagsQuery, useGetProfileFeedQuery, useGetSingleArticleQuery } = feedApi;

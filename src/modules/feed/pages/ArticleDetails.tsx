@@ -3,21 +3,37 @@ import {ArticleBanner} from "../components/article-banner/ArticleBanner";
 import {Container} from "../../../common/components/container/Container";
 import {TagList} from "../components/tag-list/TagList";
 import {ArticleMeta} from "../components/article-meta/ArticleMeta";
+import {useGetSingleArticleQuery} from "../api/repository";
+import {useParams} from "react-router-dom";
 interface ArticleDetailsProps {
 }
 
 export const ArticleDetails: FC<ArticleDetailsProps> = () => {
+    const { slug } = useParams();
+    const {data, isLoading, isFetching, error} = useGetSingleArticleQuery({slug: slug!});
+
+    if (isLoading || isFetching) {
+        return null;
+    }
+
+    if (error) {
+        return <h1>Something went wrong...</h1>
+    }
+
+    if (!data) {
+        return <h1>Article not found</h1>
+    }
 
     return (
         <>
-            <ArticleBanner />
+            <ArticleBanner publishedAt={data.article.createdAt} title={data.article.body.replace(/\\n/g, ' ')} author={data.article.author} likes={data.article.favoritesCount}/>
             <Container>
                 <div className="pb-8 border-b">
-                    <p className="text-articleBody leading-150 font-sourceSerif mb-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi, aut ea enim exercitationem harum illum natus necessitatibus quas quos sed similique soluta temporibus, velit voluptatem! Dolorem eos possimus quam qui quod repellat sint soluta vel! Autem delectus ipsam ipsum nisi sunt! Amet autem delectus dolorem ducimus ipsa laudantium modi odio soluta vero? Cupiditate dignissimos eum illum molestiae nemo nobis obcaecati perspiciatis praesentium quia sit. Commodi culpa dolorem, doloribus esse ex excepturi id libero minima molestias mollitia numquam obcaecati placeat porro quasi qui rerum temporibus voluptas voluptatem? Ad commodi cum deserunt labore nam nulla perferendis vel. At facere fugiat modi?</p>
-                    <TagList list={['123', '456', '789']}/>
+                    <p className="text-articleBody leading-150 font-sourceSerif mb-6">{data.article.description}</p>
+                    <TagList list={data.article.tagList}/>
                 </div>
                 <div className="mt-8 flex justify-center">
-                    <ArticleMeta authorNameStyle="GREEN"/>
+                    <ArticleMeta publishedAt={data.article.createdAt} authorNameStyle="GREEN" author={data.article.author} likes={data.article.favoritesCount}/>
                 </div>
             </Container>
         </>

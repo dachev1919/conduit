@@ -1,18 +1,23 @@
 import {FC} from "react";
 import {Container} from "../../../../common/components/container/Container";
 import {ArticleMeta} from "../article-meta/ArticleMeta";
+import {IFeedAuthor} from "../../api/dto/global-feed.in";
 interface ArticleBannerProps {
+    title: string;
+    author: IFeedAuthor;
+    likes: number;
+    publishedAt: string;
 }
 
-export const ArticleBanner: FC<ArticleBannerProps> = () => {
+export const ArticleBanner: FC<ArticleBannerProps> = ({title, author, likes, publishedAt}) => {
 
     return (
         <div className="bg-conduit-gray-1000 pt-8 pb-4 mb-8">
             <Container>
                 <h1 className="text-white text-articleTitle font-bold leading-[110%] mb-8">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, amet commodi cumque, dicta dolorem ducimus ea ex id impedit iste iusto labore magnam magni nesciunt non optio pariatur placeat porro provident qui quo soluta vero! Consequuntur ducimus esse, hic ipsum maxime natus rem repellat similique sit, soluta suscipit ullam veritatis?
+                    {title}
                 </h1>
-                <ArticleMeta/>
+                <ArticleMeta author={author} likes={likes} publishedAt={publishedAt}/>
             </Container>
         </div>
     )
