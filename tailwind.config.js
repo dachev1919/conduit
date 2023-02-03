@@ -16,7 +16,10 @@ module.exports = {
                     darkenGray: "#999",
                     lightenGray: "#ddd",
                     tagColor: "#aaa",
-                    paginationHover: "#eceeef"
+                    paginationHover: "#eceeef",
+                    tagCloud: "#f3f3f3",
+                    tagDarkBg: "#818a91",
+                    tagHoverDarkBg: "#687877",
                 },
             },
             spacing: {

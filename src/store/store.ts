@@ -4,7 +4,7 @@ import {feedApi} from "../modules/feed/api/repository";
 
 export const store = configureStore({
     reducer: {
-        [feedApi.reducerPath]: feedApi.reducer
+        [feedApi.reducerPath]: feedApi.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(feedApi.middleware)
 });

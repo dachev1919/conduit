@@ -10,7 +10,7 @@ export const App: FC<AppProps> = () => {
     return (
         <>
             <Header/>
-            <main>
+            <main className="pb-16">
                 <Banner />
                 <Feed />
             </main>

@@ -1,4 +1,4 @@
-export interface IGlobalFeedIn {
+export interface IGlobalFeedInDTO {
     articles: IFeedArticle[];
     articlesCount: number;
 }

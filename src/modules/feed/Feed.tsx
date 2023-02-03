@@ -7,18 +7,22 @@ import ReactPaginate from "react-paginate";
 import {FEED_PAGE_SIZE} from "./consts/consts";
 import {useSearchParams} from "react-router-dom";
 import {serializeSearchParams} from "../../utils/router";
+import {TagCloud} from "./components/tag-cloud/TagCloud";
 
 interface FeedProps {}
 
 export const Feed: FC<FeedProps> = () => {
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(searchParams.get('page') ? Number(searchParams.get('page')) : 0);
     const pageChangeHandler = ({selected}: {selected: number}) => {
         setPage(selected);
         setSearchParams(serializeSearchParams({page: String(selected)}))
-    }
+    };
 
-    const {data, error, isLoading, isFetching} = useGetGlobalFeedQuery({ page });
+    const {data, error, isLoading, isFetching} = useGetGlobalFeedQuery({
+        page,
+        tag: searchParams.get("tag"),
+    });
 
     if (isLoading || isFetching) {
         return (
@@ -38,9 +42,9 @@ export const Feed: FC<FeedProps> = () => {
 
     return (
         <Container>
-            <FeedToggle/>
-            <div className="flex pb-8">
+            <div className="flex">
                 <div className="w-3/4">
+                    <FeedToggle/>
                     <ArticleList list={data?.articles || []} />
                     <nav className="flex mt-4">
                         <ReactPaginate
@@ -58,8 +62,8 @@ export const Feed: FC<FeedProps> = () => {
                         />
                     </nav>
                 </div>
-                <div className="w-1/4">
-
+                <div className="w-1/4 pl-3 relative">
+                    <TagCloud />
                 </div>
             </div>
         </Container>
