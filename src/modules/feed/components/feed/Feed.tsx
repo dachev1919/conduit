@@ -49,7 +49,7 @@ export const Feed: FC<FeedProps> = ({isLoading, isFetching, error, data}) => {
                     containerClassName="flex"
                     pageClassName="group flex"
                     activeClassName="active"
-                    pageRangeDisplayed={(data?.articlesCount || 0) / FEED_PAGE_SIZE}
+                    pageRangeDisplayed={Math.ceil((data?.articlesCount || 0) / FEED_PAGE_SIZE)}
                     activeLinkClassName="group-[.active]:bg-conduit-green group-[.active]:text-white group-[.active]:border-conduit-green"
                     pageLinkClassName="py-2 px-2.5 leading-none text-conduit-green bg-white border border-conduit-gray-300 -ml-px hover:bg-conduit-gray-200 group-[&:nth-child(2)]:rounded-l group-[&:nth-last-child(-n+2)]:rounded-r"
                     onPageChange={pageChangeHandler}

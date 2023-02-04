@@ -30,7 +30,7 @@ export const ArticleMeta: FC<ArticleMetaProps> = ({
                                publishedAt={publishedAt} nameStyle={authorNameStyle}/>
                 {showActionButtons && (
                     <>
-                        <FollowButton name={author.username}/>
+                        <FollowButton btnStyle="DARK" name={author.username}/>
                         <FavoriteButton count={likes || 0} customText="Favorite Article"/>
                     </>
                 )}
