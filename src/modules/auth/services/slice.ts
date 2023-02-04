@@ -1,5 +1,6 @@
 import {ISignUpInDTO} from "../api/dto/sign-up.in";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {RootState} from "../../../store/store";
 
 interface AuthState {
     user: ISignUpInDTO["user"] | null;
@@ -13,12 +14,19 @@ export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<ISignUpInDTO["user"]>) => {
+        setUser: (state, action: PayloadAction<ISignUpInDTO["user"] | null>) => {
+            if (action.payload === null) {
+                state.user = null;
+                return;
+            }
+
             state.user = {
                 ...action.payload,
             }
         }
     }
 });
+
+export const selectUser = (state: RootState) => state.auth.user;
 
 export const { setUser } = authSlice.actions;

@@ -1,15 +1,13 @@
 import {FC} from "react";
 import {Container} from "../../../common/components/container/Container";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Input} from "../../../common/components/input/Input";
 import {useForm} from "react-hook-form";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {Button} from "../../../common/components/button/Button";
-import {useLazySignInQuery} from "../api/repository";
 import {toast} from "react-toastify";
-import {setUser} from "../services/slice";
-import {useAppDispatch} from "../../../store/store";
+import {useAuth} from "../hooks/use-auth";
 
 interface SignInProps {
 }
@@ -26,6 +24,7 @@ const validationSchema = yup.object({
 );
 
 export const SignIn: FC<SignInProps> = () => {
+    const {signIn} = useAuth();
     const {register, handleSubmit, formState} = useForm<ISignInFormValues>({
         defaultValues: {
             email: "",
@@ -34,19 +33,9 @@ export const SignIn: FC<SignInProps> = () => {
         resolver: yupResolver(validationSchema)
     });
 
-    const [triggerSignInQuery] = useLazySignInQuery();
-    const navigate = useNavigate();
-    const dispatch = useAppDispatch();
-
     const OnSubmitHandler = async (values: ISignInFormValues) => {
         try {
-            const { data } = await triggerSignInQuery(values, false);
-            if (!data) {
-                throw new Error("No data in query");
-            }
-            dispatch(setUser(data.user));
-            navigate("/conduit");
-            toast.success("Authorization was successful");
+            await signIn(values);
         } catch (e) {
             toast.error("Something went wrong. Please, try again later");
         }

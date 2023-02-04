@@ -6,6 +6,7 @@ import {authApi} from "../modules/auth/api/repository";
 import {authSlice} from "../modules/auth/services/slice";
 import {persistReducer, persistStore} from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import {FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE} from "redux-persist/es/constants";
 
 const persistConfig = {
     key: "conduit",
@@ -22,7 +23,9 @@ const persistentReducer = persistReducer(persistConfig, combineReducers({
 
 export const store = configureStore({
     reducer: persistentReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}).concat(feedApi.middleware, profileApi.middleware, authApi.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        }}).concat(feedApi.middleware, profileApi.middleware, authApi.middleware)
 });
 
 export const persistedStore = persistStore(store);
