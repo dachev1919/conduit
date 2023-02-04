@@ -1,4 +1,4 @@
-import {ISignUpInDTO} from "../api/dto/sign-up-in";
+import {ISignUpInDTO} from "../api/dto/sign-up.in";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 interface AuthState {
